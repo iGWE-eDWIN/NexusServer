@@ -97,7 +97,9 @@ const io = new Server(server, {
 // ==============================
 // Middleware
 // ==============================
-app.use(cors({ origin: 'http://localhost:5173', credentials: false }));
+app.use(
+  cors({ origin: 'https://nexus-express.vercel.app', credentials: false })
+);
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
