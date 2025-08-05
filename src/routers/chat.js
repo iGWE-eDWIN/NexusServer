@@ -105,7 +105,11 @@
 // routes/chatRoutes.js
 const express = require('express');
 const { auth, adminAuth } = require('../middleware/auth');
-const { getAllChats, getChat } = require('../controllers/chat');
+const {
+  getAllChats,
+  getChat,
+  deleteChatMessage,
+} = require('../controllers/chat');
 
 const router = express.Router();
 
@@ -120,5 +124,6 @@ router.get('/chats', auth, adminAuth, getAllChats);
 
 // ✅ Get specific general chat by ID (admin or frontend viewing)
 router.get('/chats/:id', auth, adminAuth, getChat);
+router.delete(`/chats/:messageId`, auth, adminAuth, deleteChatMessage);
 
 module.exports = router;

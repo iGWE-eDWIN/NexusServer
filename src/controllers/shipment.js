@@ -174,22 +174,17 @@ const updateShipment = async (req, res) => {
 // Delete shipment (admin only)
 const deleteShipment = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { trackingNumber } = req.params;
 
-    const shipment = await Shipment.findByIdAndUpdate(
-      id,
-      { isActive: false },
-      { new: true }
-    );
-
-    if (!shipment) {
-      return res.status(404).send({ message: 'Shipment not found' });
+    const deleted = await Shipment.findOneAndDelete({ trackingNumber });
+    if (!deleted) {
+      return res.status(404).send({ error: 'Shipment not found' });
     }
 
     res.send({ message: 'Shipment deleted successfully' });
   } catch (error) {
-    console.error('Delete shipment error:', error);
-    res.status(500).send({ message: 'Server error' });
+    console.error('Error deleting shipment:', error);
+    res.status(500).send({ error: 'Failed to delete shipment' });
   }
 };
 

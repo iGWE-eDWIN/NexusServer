@@ -18,6 +18,11 @@ router.post('/shipments/create', createshipment);
 
 router.put('/shipments/update/:id', auth, adminAuth, updateShipment);
 
-router.delete('/shipments/delete/:id', auth, adminAuth, deleteShipment);
+router.delete(
+  '/shipments/delete/:trackingNumber',
+  auth,
+  adminAuth,
+  deleteShipment
+);
 
 module.exports = router;
